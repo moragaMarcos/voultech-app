@@ -6,7 +6,8 @@
 // - Img (url:text,opcional)
 // - Categoria de tipo (obligatoria, notebooks | celulares | consolas) enum
 // - Precio de tipo number, obligatorio
-export interface Products{
+export interface Product{
+    id: number
     name: string
     description?: string
     creationDate: Date
