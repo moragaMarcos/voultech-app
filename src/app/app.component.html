@@ -1,6 +1,102 @@
-<nav class="flex gap-0 p-4 bg-blue-500 text-white">
-  <a routerLink="/dashboard" routerLinkActive="active-link" class="p-4 mr-4">Dashboard</a>
-  <a routerLink="/settings" class="p-4 mr-4">Settings</a>
-  <a routerLink="/products" class="p-4">Products</a>
-</nav>
-<router-outlet></router-outlet>
+<div class="flex flex-col h-screen">
+    <header class="flex items-center justify-between w-full bg-slate-900 p-4 shadow-md transition-all duration-300 ease-in-out">
+        <figure class="w-9 transform transition-transform duration-300 hover:scale-110">
+          <img 
+            src="assets/images/png/voultech-logo.png" 
+            alt="Logo Sistema" 
+            class="w-9 h-9" />
+        </figure>
+      
+        <div class="w-64 text-center">
+            <h1 class="text-white text-1xl font-bold tracking-wide overflow-hidden">
+              {{ title + ' | Voultech App' | uppercase }}
+            </h1>
+        </div>
+        <div class="flex flex-col">
+          <label class="text-white mb-1 text-xs " for="category">SELECCIONAR CATEGORÍA</label>
+          <select 
+            name="category" 
+            id="category" 
+            class="rounded border border-gray-300 p-2 bg-slate-800 text-white focus:border-blue-400 focus:outline-none transition-colors duration-300"
+            (change)="onCategoryChange($event.target)">
+            <option 
+              *ngFor="let category of categories" 
+              [value]="category" 
+              [selected]="category === 'Notebooks'">
+              {{ category }}
+            </option>
+          </select>
+        </div>
+      
+        <div class="flex items-center gap-6">
+          <span [matMenuTriggerFor]="notificationMenu" class="text-4xl text-white material-icons cursor-pointer transition-transform duration-300 hover:scale-110">
+            circle_notifications
+          </span>
+          <div [matMenuTriggerFor]="profileMenu" class="flex items-center cursor-pointer transition-transform duration-300 hover:scale-105">
+            <span class="text-4xl text-white material-icons">
+              person
+            </span>
+            <h3 class="text-white font-medium">Marcos Moraga</h3>
+          </div>
+        </div>
+        <mat-menu #profileMenu="matMenu">
+            <div class="bg-slate-500 p-2">
+                <div>
+                  <span>Nombre: Marcos Moraga</span>
+                  <span>Pais: Chile</span>
+                  <span>Lenguaje: Español</span>
+                  <button>Configuracion</button>
+                </div>
+            </div>
+        </mat-menu>
+        <mat-menu #notificationMenu="matMenu">
+            <div class="bg-slate-500 p-2" *ngIf="notifications.length > 0; else noNotifications">
+              <div *ngFor="let notification of notifications" class="notification-item">
+                <div>
+                  <h2>{{ notification.title }}</h2>
+                  <p>{{ notification.message }}</p>
+                </div>
+              </div>
+            </div>
+            <ng-template #noNotifications>
+              <div class="p-4 text-center text-gray-500">
+                No hay notificaciones
+              </div>
+            </ng-template>
+        </mat-menu>
+      </header>
+
+      <div class="flex flex-1 overflow-hidden ">
+        <aside [ngClass]="isCollapsed ? 'w-16' : 'w-52'" class="flex flex-col justify-center bg-slate-900 p-4 h-full relative transition-all duration-300 shadow-md">
+            <ul class="flex flex-col gap-7">
+                <li *ngFor="let item of menuItems" class="flex items-center">
+                  <a
+                    (click)="setTitle(item.label)"
+                    [routerLink]="item.route"
+                    class="flex items-center w-full rounded hover:bg-slate-950  transition-colors duration-200 overflow-visible"
+                  >
+                    <span class="hover:text-amber-500 text-white text-3xl material-icons overflow-visible">
+                      {{ item.icon }}
+                    </span>
+                    <span *ngIf="!isCollapsed" class="text-white ml-3 w-full text-base tracking-widest font-medium">
+                      {{ item.label }}
+                    </span>
+                  </a>
+                </li>
+              </ul>
+          
+          
+            <button (click)="toggleSidebar()" class="absolute bottom-4 right-4 focus:outline-none">
+                <span class="block material-icons text-4xl text-white">
+                    {{ isCollapsed ? 'chevron_right' : 'chevron_left' }}
+                </span>
+            </button>
+        </aside>
+        
+        <main class="flex-1 p-4 overflow-auto">
+          <router-outlet></router-outlet>
+        </main>
+      </div>
+      
+  </div>
+  

@@ -24,7 +24,7 @@ export enum ProductState {
 }
   
 export enum ProductCategory {
-    Notebooks = 'notebooks',
-    Celulares = 'celulares',
-    Consolas = 'consolas',
+    Notebooks = 'Notebooks',
+    Celulares = 'Celulares',
+    Consolas = 'Consolas',
 }
