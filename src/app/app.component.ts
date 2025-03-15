@@ -42,8 +42,11 @@ export class AppComponent {
   ];
   constructor(private globalCategoryService: GlobalCategoryService) {}
 
-  onCategoryChange(newCategory: any): void {
-    this.globalCategoryService.changeCategory(newCategory);
+  onCategoryChange(target: any): void {
+    const selector = target as HTMLSelectElement
+    const category = selector.value as ProductCategory
+    
+    this.globalCategoryService.changeCategory(category);
   }
   setTitle(title:string){
     this.title = title

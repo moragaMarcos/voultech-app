@@ -1,0 +1,22 @@
+[
+  { "id": 1, "name": "Notebook A", "state": "completado", "category": "Notebooks" },
+  { "id": 2, "name": "Notebook B", "state": "inicial", "category": "Notebooks" },
+  { "id": 3, "name": "Notebook C", "state": "pendiente", "category": "Notebooks" },
+  { "id": 4, "name": "Notebook D", "state": "completado", "category": "Notebooks" },
+  { "id": 5, "name": "Notebook E", "state": "inicial", "category": "Notebooks" },
+  { "id": 6, "name": "Notebook F", "state": "pendiente", "category": "Notebooks" },
+  { "id": 7, "name": "Notebook G", "state": "completado", "category": "Notebooks" },
+  { "id": 8, "name": "Notebook H", "state": "inicial", "category": "Notebooks" },
+  { "id": 9, "name": "Notebook I", "state": "pendiente", "category": "Notebooks" },
+  { "id": 10, "name": "Notebook J", "state": "completado", "category": "Notebooks" },
+  
+  { "id": 11, "name": "Celular A", "state": "pendiente", "category": "Celulares" },
+  { "id": 12, "name": "Celular B", "state": "completado", "category": "Celulares" },
+  { "id": 13, "name": "Celular C", "state": "inicial", "category": "Celulares" },
+  { "id": 14, "name": "Celular D", "state": "pendiente", "category": "Celulares" },
+  { "id": 15, "name": "Celular E", "state": "completado", "category": "Celulares" },
+  
+  { "id": 16, "name": "Consola A", "state": "inicial", "category": "Consolas" },
+  { "id": 17, "name": "Consola B", "state": "pendiente", "category": "Consolas" },
+  { "id": 18, "name": "Consola C", "state": "completado", "category": "Consolas" }
+]
