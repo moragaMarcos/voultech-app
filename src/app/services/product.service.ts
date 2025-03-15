@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product, ProductCategory } from '../models/product.model';
+import { Product, ProductCategory, ProductState } from '../models/product.model';
 import { ProductStorageService } from './product-storage.service';
 
 @Injectable({
@@ -20,6 +20,15 @@ export class ProductService {
   }
   getProducts():Product[]{
    return this.productStorage.getProducts()
+  }
+
+  getProductsByCategory(category:ProductCategory):Product[]{
+    const products = this.productStorage.getProducts()
+    return products.filter(product=> product.category === category) || []
+  }
+
+  getProductsByStateAndCategory(state:ProductState, category:ProductCategory){
+    return this.getProductsByCategory(category).filter(product=>product.state === state) || []
   }
 
   getProductsByDate(dateFrom:Date, dateTo:Date, category:ProductCategory){
