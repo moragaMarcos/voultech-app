@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ClasifyDistributionChartComponent } from './clasify-distribution-chart.component';
+import { DistributionChartComponent } from './distribution-chart.component';
 
 describe('ClasifyDistributionChartComponent', () => {
-  let component: ClasifyDistributionChartComponent;
-  let fixture: ComponentFixture<ClasifyDistributionChartComponent>;
+  let component: DistributionChartComponent;
+  let fixture: ComponentFixture<DistributionChartComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ClasifyDistributionChartComponent]
+      imports: [DistributionChartComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ClasifyDistributionChartComponent);
+    fixture = TestBed.createComponent(DistributionChartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
