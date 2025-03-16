@@ -16,7 +16,7 @@ export class ProductStorageService {
     const products = JSON.parse(productsData) as Product[];
     return products.map(product => ({
       ...product,
-      date: new Date(product.creationDate)
+      creationDate: new Date(product.creationDate)
     }));
   }
 

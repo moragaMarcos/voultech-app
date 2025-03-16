@@ -1,1 +1,10 @@
-<p>recent-products-list works!</p>
+<div *ngIf="products.length > 0" class="bg-slate-800 shadow rounded p-4 overflow-x-auto text-white h-64">
+    <h3 class="text-xl font-semibold mb-4">Recent Products</h3>
+    <ul *ngFor="let product of products" class="flex space-x-4 gap-2">
+        <app-recent-products-card [producto]="product"></app-recent-products-card>
+    </ul>
+</div>
+
+<div *ngIf="products.length === 0" class="bg-slate-800 shadow rounded p-4 flex justify-center items-center text-white h-64">
+    <h3 class="text-xl font-semibold mb-4 text-center">No existen productos en el inventario</h3>
+</div>

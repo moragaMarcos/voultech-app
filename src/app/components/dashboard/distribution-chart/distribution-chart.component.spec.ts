@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DistributionChartComponent } from './distribution-chart.component';
 
-describe('ClasifyDistributionChartComponent', () => {
+describe('DistributionChartComponent', () => {
   let component: DistributionChartComponent;
   let fixture: ComponentFixture<DistributionChartComponent>;
 

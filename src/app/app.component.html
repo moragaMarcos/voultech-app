@@ -1,5 +1,5 @@
-<div class="flex flex-col h-screen">
-    <header class="flex items-center justify-between w-full bg-slate-900 p-4 shadow-md transition-all duration-300 ease-in-out">
+<div class="flex bg-slate-950 flex-col h-screen p-5">
+    <header class="rounded-t-lg flex items-center rounded-br-lg justify-between w-full bg-slate-900 p-4 shadow-md transition-all duration-300 ease-in-out">
         <figure class="w-9 transform transition-transform duration-300 hover:scale-110">
           <img 
             src="assets/images/png/voultech-logo.png" 
@@ -66,8 +66,8 @@
         </mat-menu>
       </header>
 
-      <div class="flex flex-1 overflow-hidden ">
-        <aside [ngClass]="isCollapsed ? 'w-16' : 'w-52'" class="flex flex-col justify-center bg-slate-900 p-4 h-full relative transition-all duration-300 shadow-md">
+      <div class="flex flex-1  overflow-hidden ">
+        <aside  [ngClass]="isCollapsed ? 'w-16' : 'w-52'" class=" rounded-b-xl rounded-br-lg flex flex-col justify-center bg-slate-900 p-4 h-full relative transition-all duration-300 shadow-md">
             <ul class="flex flex-col gap-7">
                 <li *ngFor="let item of menuItems" class="flex items-center">
                   <a
@@ -93,7 +93,7 @@
             </button>
         </aside>
         
-        <main class="flex-1 p-4 overflow-auto">
+        <main class="flex-1 p-4 overflow-x-hidden">
           <router-outlet></router-outlet>
         </main>
       </div>

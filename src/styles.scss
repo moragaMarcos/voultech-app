@@ -12,3 +12,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-mdc-menu-content{
     padding: 0 !important;
 }
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1;
+  font-size: 12px;
+}
+*{
+  scrollbar-color: #444746 transparent;
+  scrollbar-width: 5px;
+  scrollbar-width: thin;
+}

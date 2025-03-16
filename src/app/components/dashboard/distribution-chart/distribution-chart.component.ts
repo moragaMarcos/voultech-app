@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ProductService } from '../../../services/product.service';
 import { GlobalCategoryService } from '../../../services/global-category.service';
-import { Product, ProductState } from '../../../models/product.model';
+import { Product, ProductCategory, ProductState } from '../../../models/product.model';
 import { NgxEchartsModule, provideEchartsCore } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
+import { RecentProductsListComponent } from "../recent-products-list/recent-products-list.component";
 
 @Component({
   selector: 'app-distribution-chart',
-  imports: [NgxEchartsModule],
+  imports: [NgxEchartsModule, RecentProductsListComponent],
   templateUrl: './distribution-chart.component.html',
   styleUrl: './distribution-chart.component.scss',
   providers: [
@@ -24,21 +25,65 @@ export class DistributionChartComponent {
   completeStateProducts: Product[] = []
   chartOptions: EChartsOption = {};
   chartOptionsPie: EChartsOption = {};
-  private data: number[] = [];
-  private labels: string[] = [];
   showLabel = false;
-
+  currentCategory!: ProductCategory
   private subscription!: Subscription
-  option = {
-   
-  };
+  trendData:any
+
   ngOnInit(): void {
-   this.subscription = this.globalCategoryService.category$.subscribe(category=>{
+    this.subscription = this.globalCategoryService.category$.subscribe(category=>{
+      this.trendData = this.productService.getTrendData(category)
+      this.currentCategory = category
       this.initialStateProducts = this.productService.getProductsByStateAndCategory('inicial' as ProductState, category)
       this.completeStateProducts = this.productService.getProductsByStateAndCategory('completado' as ProductState, category)
       this.pendingStateProducts = this.productService.getProductsByStateAndCategory('pendiente' as ProductState, category)
+      this.updateCharts()
     })
+    
    this.initChart()
+  }
+  updateCharts(): void{
+    this.chartOptions = { ...this.chartOptions, series: [{
+      name: "inicial",
+      data: this.trendData.series.inicial,
+      type: 'line'
+    },
+    { 
+      name: "pendiente",
+      data: this.trendData.series.pendiente,
+      type: 'line'
+    },
+    { 
+      name: "completado",
+      data: this.trendData.series.completado,
+      type: 'line'
+    }] };
+    this.chartOptionsPie = { ...this.chartOptionsPie, series: [{
+      name: this.currentCategory ,
+      type: 'pie',
+      radius: '50%',
+      data: [
+        { value: this.initialStateProducts.length, name: 'inicial' },
+        { value: this.pendingStateProducts.length, name: 'pendiente' },
+        { value: this.completeStateProducts.length, name: 'completado' },
+      ],
+      label: this.showLabel
+        ? {
+            show: true,
+            formatter: '{b}: {c} ({d}%)',
+            position: 'outside'
+          }
+        : {
+            show: false 
+          },
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }] };
   }
   initChart(): void {
     this.chartOptions = {
@@ -46,7 +91,7 @@ export class DistributionChartComponent {
         trigger: 'axis'
       },
       legend: {
-        data: ['Activos', 'Pendientes', 'Completos']
+        data: ['inicial', 'pendiente', 'completado']
       },
       toolbox: {
         feature: {
@@ -55,35 +100,30 @@ export class DistributionChartComponent {
       },
       xAxis: {
         type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        data: this.trendData.dates
       },
       yAxis: {
         type: 'value'
       },
       series: [
         {
-          name: "Activos",
-          data: [150, 230, 224, 218, 135, 147, 260],
+          name: "inicial",
+          data: this.trendData.series.inicial,
           type: 'line'
         },
         { 
-          name: "Pendientes",
-          data: [22, 14, 43, 54, 71, 85, 80],
+          name: "pendiente",
+          data: this.trendData.series.pendiente,
           type: 'line'
         },
         { 
-          name: "Completos",
-          data: [2, 0, 0, 5, 6, 5, 2],
+          name: "completado",
+          data: this.trendData.series.completado,
           type: 'line'
         }
       ],
     };
     this.chartOptionsPie = {
-      title: {
-        text: 'Clasify Distribution',
-        subtext: 'Fake Data',
-        left: 'center'
-      },
       tooltip: {
         trigger: 'item',
       },
@@ -98,13 +138,13 @@ export class DistributionChartComponent {
       },
       series: [
         {
-          name: 'Nootebooks',
+          name: this.currentCategory ,
           type: 'pie',
           radius: '50%',
           data: [
-            { value: 104, name: 'Activos' },
-            { value: 73, name: 'Pendientes' },
-            { value: 58, name: 'Completos' },
+            { value: this.initialStateProducts.length, name: 'inicial' },
+            { value: this.pendingStateProducts.length, name: 'pendiente' },
+            { value: this.completeStateProducts.length, name: 'completado' },
           ],
           label: this.showLabel
             ? {
