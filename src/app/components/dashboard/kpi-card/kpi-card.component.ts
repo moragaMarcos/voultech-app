@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../services/product.service';
-import { Product, ProductCategory, ProductState } from '../../../models/product.model';
+import { ProductState } from '../../../models/product.model';
 import { GlobalCategoryService } from '../../../services/global-category.service';
 import { Subscription } from 'rxjs';
 
@@ -11,12 +11,14 @@ import { Subscription } from 'rxjs';
   styleUrl: './kpi-card.component.scss'
 })
 export class KpiCardComponent implements OnInit {
-  constructor(private productService: ProductService, private globalCategoryService: GlobalCategoryService){}
+  constructor(
+    private productService: ProductService, 
+    private globalCategoryService: GlobalCategoryService,
+  ){}
   totalByCategory:number = 0
   initialStateProducts: number = 0
   pendingStateProducts: number = 0
   completeStateProducts: number = 0
-
   private subscription!: Subscription
 
   ngOnInit(): void {

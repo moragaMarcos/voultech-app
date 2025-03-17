@@ -20,3 +20,4 @@
   { "id": 17, "name": "Consola B", "state": "pendiente", "category": "Consolas", "creationDate": "2025-03-14T10:00:00Z" },
   { "id": 18, "name": "Consola C", "state": "completado", "category": "Consolas", "creationDate": "2025-03-13T13:15:00Z" }
 ]
+

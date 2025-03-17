@@ -36,7 +36,7 @@
             (change)="onCategoryChange($event.target)">
             <option 
               *ngFor="let category of categories" 
-              [value]="category" 
+              [value]="category"
               [selected]="category === 'Notebooks'">
               {{ category }}
             </option>
@@ -45,25 +45,31 @@
       
         <mat-menu #profileMenu="matMenu">
             <div class="bg-slate-500 p-2">
-                <div>
+                <div class="bg-slate-800 p-3 rounded-lg text-white flex flex-col gap-2">
                   <span>Nombre: Marcos Moraga</span>
                   <span>Pais: Chile</span>
                   <span>Lenguaje: Español</span>
-                  <button>Configuracion</button>
                 </div>
             </div>
         </mat-menu>
         <mat-menu #notificationMenu="matMenu">
-            <div class="bg-slate-500 p-2" *ngIf="notifications.length > 0; else noNotifications">
-              <div *ngFor="let notification of notifications" class="notification-item">
-                <div>
-                  <h2>{{ notification.title }}</h2>
-                  <p>{{ notification.message }}</p>
+            <div class="bg-slate-500 p-2" *ngIf="activeAlarms.length > 0; else noNotifications">
+              <div *ngFor="let alarm of activeAlarms" class="notification-item">
+                <div class="bg-slate-800 p-3 rounded-lg flex flex-col text-white gap-2">
+                    <h2 class="text-base font-bold">ALARMA ACTIVADA</h2>
+                  <div>
+                    <p class="text-orange-400">Nombre Alarma</p>
+                    <h2>{{ alarm.name }}</h2>
+                  </div>
+                  <div>
+                    <p class="text-orange-400">Categoría</p>
+                    <p>{{ alarm.category }}</p>
+                  </div>
                 </div>
               </div>
             </div>
             <ng-template #noNotifications>
-              <div class="p-4 text-center text-gray-500">
+              <div class="p-4 text-white bg-slate-800 text-center">
                 No hay notificaciones
               </div>
             </ng-template>

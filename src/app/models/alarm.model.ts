@@ -8,6 +8,7 @@ export interface Alarm{
     condition: AlarmCondition
     value: number
     isEditing:boolean
+    active: false
 }
 
 export enum AlarmCondition{

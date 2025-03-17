@@ -9,6 +9,8 @@ import { GlobalCategoryService } from './services/global-category.service';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { AlarmStorageService } from './services/alarm-storage.service';
+import { AlarmService } from './services/alarm.service';
+import { Alarm } from './models/alarm.model';
 
 interface Notification {
   id: number;
@@ -27,11 +29,9 @@ export class AppComponent implements OnInit {
   categories = Object.values(ProductCategory);
   private subscription!: Subscription;
   isCollapsed = false;
+  activeAlarms: Alarm[] = [];
 
-  notifications: Notification[] = [
-    { id: 1, title: 'Nueva tarea asignada', message: 'Tarea #123' },
-    { id: 2, title: 'Mensaje de soporte', message: 'Revisa el mensaje #456' },
-  ];
+
   toggleSidebar(): void {
     this.isCollapsed = !this.isCollapsed;
   }
@@ -41,10 +41,17 @@ export class AppComponent implements OnInit {
     { label: 'Products', icon: 'inventory', route: '/products' },
     { label: 'Settings', icon: 'settings', route: '/settings' }
   ];
-  constructor(private globalCategoryService: GlobalCategoryService, private alarmStorageService:AlarmStorageService) {}
+  constructor(
+    private globalCategoryService: GlobalCategoryService, 
+    private alarmStorageService:AlarmStorageService,
+    private alarmService:AlarmService
+  ) {}
   
   ngOnInit(){
     this.alarmStorageService.initAlarms()
+    this.globalCategoryService.category$.subscribe(category=>{
+      this.activeAlarms = this.alarmService.getActiveAlarmsByCategory(category)
+    })
   }
   
   onCategoryChange(target: any): void {

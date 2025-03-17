@@ -36,7 +36,8 @@ export class AlarmStorageService {
           criterion: "inicial" as ProductState,        
           condition: AlarmCondition.MayorQue,
           value: 2,
-          isEditing:false
+          isEditing:false,
+          active: false
         },
         {
           id: 2,
@@ -45,7 +46,8 @@ export class AlarmStorageService {
           criterion: "completado" as ProductState,
           condition: AlarmCondition.MenorQue,
           value: 4,
-          isEditing:false
+          isEditing:false,
+          active: false
         },
         {
           id: 3,
@@ -54,7 +56,8 @@ export class AlarmStorageService {
           criterion: "pendiente" as ProductState,
           condition: AlarmCondition.MenorOIgualQue,
           value: 5,
-          isEditing:false
+          isEditing:false,
+          active: false
         }
       ];
       localStorage.setItem(this.storageKey, JSON.stringify(initialAlarms));
