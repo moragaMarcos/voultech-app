@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { ProductDetailComponent } from "../../components/products/product-detail/product-detail.component";
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Product } from '../../models/product.model';
+import { Product, ProductCategory } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
+import { GlobalCategoryService } from '../../services/global-category.service';
 
 @Component({
   selector: 'app-products-detail',
@@ -13,10 +14,18 @@ import { CommonModule } from '@angular/common';
 })
 export class ProductsDetailComponent {
   product: Product | undefined;
-
-  constructor(private route: ActivatedRoute, private productService:ProductService) {}
+  category!:ProductCategory
+  constructor(
+    private route: ActivatedRoute, 
+    private productService:ProductService,
+    private globalCategoryService:GlobalCategoryService) {}
 
   ngOnInit() {
-    this.product = this.productService.getProductById(Number(this.route.snapshot.paramMap.get('id')))
+    this.productService.getProductById(Number(this.route.snapshot.paramMap.get('id'))).subscribe(product=>{
+      this.product = product
+    })
+    this.globalCategoryService.category$.subscribe(category=>{
+      this.category = category
+    })
   }
 }

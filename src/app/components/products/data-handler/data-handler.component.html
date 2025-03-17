@@ -1,26 +1,32 @@
-<div class="p-6 flex flex-col gap-6 bg-gray-900 rounded-lg h-full">
+<div class="md:hidden flex justify-between items-center bg-gray-800 p-4">
+  <h3 class="text-xl font-bold text-white">Filtros</h3>
+  <button (click)="toggleFilters()" class="text-white focus:outline-none">
+    <span class="material-icons">filter_alt</span>
+  </button>
+</div>
+<div [ngClass]="{'hidden': !showFilters, 'block': showFilters}" class="md:block p-6 flex flex-col gap-6 bg-gray-900 rounded-lg h-full">
   <section>
-    <h3 class="text-2xl font-bold text-white mb-4">Filtros</h3>
+    <h3 class="text-xl font-bold text-white mb-4">Filtros</h3>
     <div class="mb-6">
-      <h4 class="text-xl font-semibold text-white">Status</h4>
-      <div class="flex gap-4 mt-2">
+      <h4 class="text-lg font-semibold text-white">Status</h4>
+      <div class="flex flex-wrap gap-4 mt-2">
         <button class="flex items-center gap-1 focus:outline-none">
           <label for="initial">
-            <span [ngClass]="isInitial ? 'text-green-800' : 'text-stone-950'" class="material-symbols-outlined text-green-800">circle</span>
+            <span [ngClass]="isInitial ? 'text-green-800' : 'text-stone-950'" class="material-symbols-outlined">circle</span>
             <span class="text-white">Iniciados</span>
           </label>
-          <input [(ngModel)]="isInitial" (change)="onSelectedStatus($event)" hidden name="inicial" id="initial" checked type="checkbox">
+          <input [(ngModel)]="isInitial" (change)="onSelectedStatus($event)" hidden name="inicial" id="initial" type="checkbox" checked>
         </button>
         <button class="flex items-center gap-1 focus:outline-none">
           <label for="pending">
-            <span [ngClass]="isPending ? 'text-orange-600' : 'text-stone-950'" class="material-symbols-outlined text-orange-600">circle</span>
+            <span [ngClass]="isPending ? 'text-orange-600' : 'text-stone-950'" class="material-symbols-outlined">circle</span>
             <span class="text-white">Pendientes</span>
           </label>
-          <input [(ngModel)]="isPending" (change)="onSelectedStatus($event)" hidden type="checkbox" checked  name="pendiente" id="pending">
+          <input [(ngModel)]="isPending" (change)="onSelectedStatus($event)" hidden type="checkbox" checked name="pendiente" id="pending">
         </button>
         <button class="flex items-center gap-1 focus:outline-none">
           <label for="completed">
-            <span [ngClass]="isCompleted ? 'text-green-400' : 'text-stone-950'" class="material-symbols-outlined text-green-400">circle</span>
+            <span [ngClass]="isCompleted ? 'text-green-400' : 'text-stone-950'" class="material-symbols-outlined">circle</span>
             <span class="text-white">Completados</span>
           </label>
           <input [(ngModel)]="isCompleted" (change)="onSelectedStatus($event)" hidden type="checkbox" checked name="completado" id="completed">
@@ -28,37 +34,31 @@
       </div>
     </div>
     <div class="mb-6">
-      <h4 class="text-xl font-semibold text-white">Fecha</h4>
+      <h4 class="text-lg font-semibold text-white">Fecha</h4>
       <p class="text-sm text-white">Selecciona el rango de fechas</p>
-      <div class="flex items-center gap-2 mt-2">
-        <mat-date-range-input class="bg-white rounded-lg w-full p-2" [rangePicker]="picker">
-          <input (dateChange)="onSelectedDate('start',$event)"  class="w-full" matStartDate placeholder="Fecha inicio">
-          <input (dateChange)="onSelectedDate('end',$event)"  class="w-full" matEndDate placeholder="Fecha fin">
+      <div class="flex flex-col sm:flex-row items-center gap-2 mt-2">
+        <mat-date-range-input class="bg-white rounded-lg w-full p-1" [rangePicker]="picker">
+          <input (dateChange)="onSelectedDate('start',$event)" class="w-full" matStartDate placeholder="Fecha inicio">
+          <input (dateChange)="onSelectedDate('end',$event)" class="w-full" matEndDate placeholder="Fecha fin">
         </mat-date-range-input>
-        <mat-datepicker-toggle  matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-date-range-picker  #picker></mat-date-range-picker>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
       </div>
     </div>
     <div>
-      <h4 class="text-xl font-semibold text-white">Precio máximo</h4>
+      <h4 class="text-lg font-semibold text-white">Precio máximo</h4>
       <div class="flex flex-col items-center mt-2">
         <span class="text-white mb-2">Selecciona un precio máximo: {{ maxPriceSlider }}</span>
-        <input
-          type="range"
-          [max]="maxPrice"
-          [(ngModel)]="maxPriceSlider"
-          (change)="onChangeRangeBtn($event.target)"
-          class="w-full"
-        />
+        <input type="range" [max]="maxPrice" [(ngModel)]="maxPriceSlider" (change)="onChangeRangeBtn($event.target)" class="w-full" />
       </div>
     </div>
   </section>
   <section>
-    <h3 class="text-2xl font-bold text-white mb-4">Ordenar por</h3>
+    <h3 class="text-xl font-bold text-white mb-4">Ordenar por</h3>
     <div class="space-y-4">
       <div class="flex justify-between items-center">
         <label for="orderByDateAsc">
-          <span class="text-xl font-semibold text-white">Fecha</span>
+          <span class="text-lg font-semibold text-white">Fecha</span>
           <span *ngIf="orderByDateAsc" class="material-icons text-white">arrow_upward</span>
           <span *ngIf="!orderByDateAsc" class="material-icons text-white">arrow_downward</span>
         </label>
@@ -66,7 +66,7 @@
       </div>
       <div class="flex justify-between items-center">
         <label for="orderByPriceAsc">
-          <span class="text-xl font-semibold text-white">Precio</span>
+          <span class="text-lg font-semibold text-white">Precio</span>
           <span *ngIf="orderByPriceAsc" class="material-icons text-white">arrow_upward</span>
           <span *ngIf="!orderByPriceAsc" class="material-icons text-white">arrow_downward</span>
         </label>

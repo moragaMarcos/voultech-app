@@ -1,8 +1,8 @@
 <div *ngIf="product" class="p-2 w-full h-full">
-    <div class="w-full">
-        <h2 class="text-white">Notebooks</h2>
+    <div class="w-full mb-2">
+        <h2 class="text-3xl text-orange-400 md:mr-8">{{category}}</h2>
         <div class="flex text-white items-center gap-1">
-            <a class="text-xs" routerLink="/products">notebooks</a>
+            <a class="text-xs" routerLink="/products">{{category | lowercase}}</a>
             <span>/</span>
             <p class="text-amber-600 text-xs">{{product.name}}</p>
         </div>

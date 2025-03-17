@@ -30,6 +30,7 @@ export class AppComponent implements OnInit {
   private subscription!: Subscription;
   isCollapsed = false;
   activeAlarms: Alarm[] = [];
+  isMobileMenuOpen = false;
 
 
   toggleSidebar(): void {
@@ -53,7 +54,10 @@ export class AppComponent implements OnInit {
       this.activeAlarms = this.alarmService.getActiveAlarmsByCategory(category)
     })
   }
-  
+
+  toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
   onCategoryChange(target: any): void {
     const selector = target as HTMLSelectElement
     const category = selector.value as ProductCategory

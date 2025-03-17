@@ -1,39 +1,37 @@
-<div *ngIf="product; else dataContent" class="flex rounded-lg w-full gap-3">
-    <div class="w-full h-full bg-white rounded-lg overflow-hidden flex">
-        <div class="w-1/2 flex items-center justify-center bg-gray-100 py-8">
-            <img src="https://picsum.photos/seed/random/400/400" alt="Imagen del producto" class="object-contain max-w-full max-h-full">
-          </div>
-        <div class="w-1/2 p-6 flex flex-col justify-between">
-          <h3 class="text-3xl font-bold text-gray-800">{{ product.name }}</h3>
-          <p class="mt-2 text-xl text-gray-600">
-            Estado: <span class="font-semibold text-green-500">{{ product.state }}</span>
-          </p>
-          <p class="mt-1 text-xl text-gray-500">
-            Fecha: {{ product.creationDate | date:'dd/MM/yyyy' }}
-          </p>
-          <p class="mt-4 text-gray-700">Categoría: {{ product.category }}</p>
-          <p class="mt-2 text-gray-700">Precio: {{ product.price }}</p>
-          <p class="mt-4">Descripción</p>
-          <p class="text-gray-600">{{ product.description }}</p>
-          <div class="mt-6 flex justify-center space-x-4">
-            <button (click)="openDialog(true)" class="flex items-center text-blue-500 hover:text-blue-700">
-              <span class="material-icons mr-1">edit</span>
-              Editar
-            </button>
-            <button class="flex items-center text-red-500 hover:text-red-700">
-              <span class="material-icons mr-1">delete</span>
-              Eliminar
-            </button>
-          </div>
-        </div>
-      </div>
-      <button (click)="openDialog(false)" class="text-white  absolute bottom-5 right-5">
-        <span class="text-7xl material-icons">add_circle</span>
+<div *ngIf="product; else dataContent" class="relative flex flex-col md:flex-row rounded-lg w-full gap-3 p-4 bg-gray-800">
+  <div class="w-full md:w-1/2 overflow-hidden flex items-center justify-center bg-gray-700 py-8">
+    <img [src]="product.urlImg ? product.urlImg : 'assets/images/svg/not-found-img.svg'" alt="Imagen del producto" class="object-contain max-w-full max-h-full">
+  </div>
+  <div class="w-full md:w-1/2 p-6 flex flex-col justify-between">
+    <h3 class="text-3xl font-bold text-white">{{ product.name }}</h3>
+    <p class="mt-2 text-gray-300">
+      Estado: <span class="font-semibold text-green-400">{{ product.state }}</span>
+    </p>
+    <p class="mt-2 text-gray-200">
+      Fecha: {{ product.creationDate | date:'dd/MM/yyyy' }}
+    </p>
+    <p class="mt-2 text-gray-200">Categoría: {{ product.category }}</p>
+    <p class="mt-2 text-gray-200">Precio: {{ product.price }}</p>
+    <p class="mt-4 text-gray-200">Descripción</p>
+    <p class="text-gray-300">{{ product.description }}</p>
+    <div class="mt-6 flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-4">
+      <button (click)="openDialog(true)" class="flex items-center text-blue-400 hover:text-blue-500">
+        <span class="material-icons mr-1">edit</span>
+        Editar
       </button>
+      <button (click)="openDeleteDialog()" class="flex items-center text-red-400 hover:text-red-500">
+        <span class="material-icons mr-1">delete</span>
+        Eliminar
+      </button>
+    </div>
+  </div>
 </div>
+<button (click)="openDialog(false)" class="text-white absolute bottom-5 right-5">
+  <span class="text-7xl material-icons">add_circle</span>
+</button>
 
 <ng-template #dataContent>
-    <div>
-        <p>El elemento no existe</p>
-    </div>
+  <div class="p-4">
+    <p class="text-gray-300">El elemento no existe</p>
+  </div>
 </ng-template>

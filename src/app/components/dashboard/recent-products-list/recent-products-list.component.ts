@@ -16,7 +16,9 @@ export class RecentProductsListComponent implements OnInit {
   constructor(private productService:ProductService, private globalCategoryService:GlobalCategoryService){}
   ngOnInit(): void {
     this.globalCategoryService.category$.subscribe(category=>{
-     this.products = this.productService.getProductsToday(category).slice(0,5)
+     this.productService.getProductsToday(category).subscribe(products=>{
+      this.products = products.slice(0,5)
+     })
     })
   }
 }

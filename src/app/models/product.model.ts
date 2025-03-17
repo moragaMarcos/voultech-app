@@ -12,7 +12,7 @@ export interface Product{
     description?: string
     creationDate: Date
     price: number
-    img?: string
+    urlImg?: string
     state: ProductState
     category: ProductCategory
 }

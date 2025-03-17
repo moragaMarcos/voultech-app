@@ -1,11 +1,11 @@
 <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-    <div class="bg-white rounded-lg shadow-lg w-full max-w-md">
-      <div class="p-4 border-b flex justify-between items-center">
-        <h3 class="text-lg font-semibold text-gray-800">Editar Producto</h3>
-        <button (click)="closeEditModal()" class="text-gray-600 hover:text-gray-800">
-          <span class="material-icons">close</span>
-        </button>
-      </div>
-      <app-product-form [product]="product.data" [isAdd]="product.add" [dialogRef]="dialogRef"></app-product-form>
+  <div class="bg-gray-800 rounded-lg shadow-lg w-full max-w-md mx-4">
+    <div class="p-4 border-b border-gray-700 flex justify-between items-center">
+      <h3 class="text-lg font-semibold text-white">{{product.add ? 'Editar Producto' : 'Añadir Producto'}}</h3>
+      <button (click)="closeEditModal()" class="text-gray-300 hover:text-gray-100">
+        <span class="material-icons">close</span>
+      </button>
     </div>
+    <app-product-form [product]="product.data" [isAdd]="product.add" [dialogRef]="dialogRef"></app-product-form>
+  </div>
 </div>

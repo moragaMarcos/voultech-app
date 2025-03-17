@@ -30,6 +30,7 @@ export class DataHandlerComponent implements OnInit {
   isInitial:boolean = true
   isPending:boolean = true
   dateObj = {start: '', end:''}
+  showFilters: boolean = false;
 
 
   constructor(private datePipe: DatePipe){}
@@ -43,6 +44,9 @@ export class DataHandlerComponent implements OnInit {
       value: checkbox.checked
     }
     this.stateFilter.emit(filterObj)
+  }
+  toggleFilters(): void {
+    this.showFilters = !this.showFilters;
   }
   onSelectedDate(type:string, event: MatDatepickerInputEvent<Date>):void{
     const transFormDate = this.datePipe.transform(event.value, 'dd/MM/yyyy')

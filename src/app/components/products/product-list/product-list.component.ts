@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { GlobalCategoryService } from '../../../services/global-category.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CrudModalComponent } from '../crud-modal/crud-modal.component';
-import { max } from 'rxjs';
+import { max, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -47,6 +47,7 @@ export class ProductListComponent {
       }
     }}
   originalStates:any = { inicial:true, completado:true, pendiente:true}
+
   readonly dialog = inject(MatDialog);
 
   constructor(
@@ -56,12 +57,16 @@ export class ProductListComponent {
     private datePipe: DatePipe
   ){}
   ngOnInit(): void {
-     this.globalCategoryService.category$.subscribe(category=>{
-       this.products = this.productService.getProductsByCategory(category)
-       this.maxPrice = Math.max(...this.products.map(product => product.price));
-       this.globalFilter.maxPrice = this.maxPrice
-       this.auxProducts = this.products
-     })
+    this.globalCategoryService.category$
+    .pipe(
+      switchMap(category => this.productService.getProductsByCategory(category))
+    )
+    .subscribe(filteredProducts => {
+      this.products = filteredProducts;
+      this.maxPrice = Math.max(...this.products.map(product => product.price));
+      this.globalFilter.maxPrice = this.maxPrice
+      this.auxProducts = this.products
+    });
   }
   goToDetail(id:number) {
     this.router.navigate([`/products/${id}`]);

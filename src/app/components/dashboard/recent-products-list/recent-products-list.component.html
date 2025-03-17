@@ -1,10 +1,12 @@
-<div *ngIf="products.length > 0" class="bg-slate-800 shadow rounded p-4 overflow-x-auto h-full text-white">
+<div *ngIf="products.length > 0" class="bg-slate-800 shadow rounded p-4 text-white">
     <h3 class="text-xl font-semibold mb-4">Recent Products</h3>
-    <ul *ngFor="let product of products" class="flex space-x-4 overflow-y-auto gap-2">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <ng-container *ngFor="let product of products">
         <app-recent-products-card [producto]="product"></app-recent-products-card>
-    </ul>
+      </ng-container>
+    </div>
 </div>
-
+  
 <div *ngIf="products.length === 0" class="bg-slate-800 shadow rounded p-4 flex justify-center items-center text-white h-full">
     <h3 class="text-xl font-semibold mb-4 text-center">No existen productos del día</h3>
 </div>

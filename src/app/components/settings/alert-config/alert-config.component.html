@@ -1,9 +1,9 @@
 <div class="bg-slate-800 text-white shadow rounded-lg p-6">
   <h1 class="text-3xl mb-6">Alarmas</h1>
-  <div class="grid grid-cols-1 gap-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
     <div *ngFor="let alarm of alarms" class="bg-slate-900 text-white shadow rounded-lg p-4">
       <div class="flex items-center justify-between mb-4">
-        <div>
+        <div class="flex items-center gap-2">
           <span *ngIf="!alarm.isEditing; else editName">
             <h2 class="text-xl font-semibold">{{ alarm.name }}</h2>
           </span>
@@ -11,23 +11,26 @@
             <input
               type="text"
               [(ngModel)]="alarm.name"
-              class="text-xl text-black border p-1 rounded"
+              class="text-xl bg-slate-200 text-slate-800 border border-slate-300 p-1 rounded"
             />
           </ng-template>
+          <span
+            class="material-icons text-base"
+            [ngClass]="alarm.active ? 'text-green-500' : 'text-red-500'"
+          >
+            fiber_manual_record
+          </span>
         </div>
-        <button
-          (click)="toggleEdit(alarm)"
-          class="text-blue-500 hover:text-blue-700"
-        >
+        <button (click)="toggleEdit(alarm)" class="text-blue-500 hover:text-blue-700">
           <span class="material-icons text-base">
             {{ alarm.isEditing ? "save" : "edit" }}
           </span>
         </button>
       </div>
-      <div class="grid grid-cols-4 gap-4 text-center mb-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-center mb-4">
         <div>
           <div class="flex items-center justify-center mb-1">
-            <p class="text-gray-500 text-sm">Valor</p>
+            <p class="text-gray-400 text-sm">Valor</p>
           </div>
           <span *ngIf="!alarm.isEditing; else editValue">
             <p class="text-lg">{{ alarm.value }}</p>
@@ -36,13 +39,13 @@
             <input
               type="number"
               [(ngModel)]="alarm.value"
-              class="text-lg text-black border p-1 rounded w-full"
+              class="text-lg bg-slate-200 text-slate-800 border border-slate-300 p-1 rounded w-full"
             />
           </ng-template>
         </div>
         <div>
           <div class="flex items-center justify-center mb-1">
-            <p class="text-gray-500 text-sm">Condición</p>
+            <p class="text-gray-400 text-sm">Condición</p>
           </div>
           <span *ngIf="!alarm.isEditing; else editCondition">
             <p class="text-lg">{{ alarm.condition }}</p>
@@ -50,7 +53,7 @@
           <ng-template #editCondition>
             <select
               [(ngModel)]="alarm.condition"
-              class="text-lg text-black border p-1 rounded w-full"
+              class="text-lg bg-slate-200 text-slate-800 border border-slate-300 p-1 rounded w-full"
             >
               <option value="mayor que">mayor que</option>
               <option value="menor que">menor que</option>
@@ -61,7 +64,7 @@
         </div>
         <div>
           <div class="flex items-center justify-center mb-1">
-            <p class="text-gray-500 text-sm">Categoría</p>
+            <p class="text-gray-400 text-sm">Categoría</p>
           </div>
           <span *ngIf="!alarm.isEditing; else editCategory">
             <p class="text-lg">{{ alarm.category }}</p>
@@ -69,7 +72,7 @@
           <ng-template #editCategory>
             <select
               [(ngModel)]="alarm.category"
-              class="text-lg text-black border p-1 rounded w-full"
+              class="text-lg bg-slate-200 text-slate-800 border border-slate-300 p-1 rounded w-full"
             >
               <option value="Notebooks">Notebooks</option>
               <option value="Celulares">Celulares</option>
@@ -79,7 +82,7 @@
         </div>
         <div>
           <div class="flex items-center justify-center mb-1">
-            <p class="text-gray-500 text-sm">Criterio</p>
+            <p class="text-gray-400 text-sm">Criterio</p>
           </div>
           <span *ngIf="!alarm.isEditing; else editCriterion">
             <p class="text-lg">{{ alarm.criterion }}</p>
@@ -87,7 +90,7 @@
           <ng-template #editCriterion>
             <select
               [(ngModel)]="alarm.criterion"
-              class="text-lg text-black border p-1 rounded w-full"
+              class="text-lg bg-slate-200 text-slate-800 border border-slate-300 p-1 rounded w-full"
             >
               <option value="inicial">inicial</option>
               <option value="completado">completado</option>
@@ -101,8 +104,7 @@
         <span class="font-semibold">{{ alarm.category }}</span> en estado
         <span class="font-semibold">{{ alarm.criterion }}</span> es
         <span class="font-semibold">{{ alarm.condition }}</span>
-        <span class="font-semibold">&nbsp;{{ alarm.value }}</span
-        >, la alarma se activará.
+        <span class="font-semibold">&nbsp;{{ alarm.value }}</span>, la alarma se activará.
       </p>
     </div>
   </div>
