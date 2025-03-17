@@ -17,5 +17,10 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/products/products.component').then((m) => m.ProductsComponent),
   },
+  {
+    path: 'products/:id',
+    loadComponent: () => 
+      import('./pages/products-detail/products-detail.component').then((m)=> m.ProductsDetailComponent)
+  },
   { path: '**', redirectTo: '/dashboard' },
 ];

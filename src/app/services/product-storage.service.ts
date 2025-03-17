@@ -14,10 +14,7 @@ export class ProductStorageService {
     const productsData = localStorage.getItem(this.storageKey);
     if (!productsData) return [];
     const products = JSON.parse(productsData) as Product[];
-    return products.map(product => ({
-      ...product,
-      creationDate: new Date(product.creationDate)
-    }));
+    return products
   }
 
   private generateId(): number {

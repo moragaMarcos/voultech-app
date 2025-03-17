@@ -12,6 +12,11 @@ export class ProductService {
   createProduct(product:Product){
     this.productStorage.createProduct(product)
   }
+  getProductById(id:number):Product | undefined {
+   const product = this.getProducts().find(product=>product.id === id)
+   if(!product) return undefined
+   return product
+  }
   updateProduct(productId:number, productBody: Partial<Product>){
     this.productStorage.updateProduct(productId, productBody)
   }

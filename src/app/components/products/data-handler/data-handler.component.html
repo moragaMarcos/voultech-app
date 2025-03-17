@@ -1,53 +1,39 @@
-<div class="p-3 flex flex-col gap-3 bg-gray-900 rounded-lg h-full">
-  <div class="flex justify-around flex-col gap-2">
-    <h3 class="text-white">Filtros</h3>
-    <h3 class="text-xl text-white font-semibold ">Status</h3>
-      <div class="w-full text-white flex gap-4">
-        <div>
-          <div class="flex justify-center gap-1">
-            <button>
-              <span class="text-green-800 material-symbols-outlined">
-                  circle
-              </span>
-              <h3>Iniciados</h3>
-            </button>
-          </div>
-        </div>
-        <div>
-          <div class="flex justify-center gap-1">
-            <button>
-              <span class="text-orange-600 material-symbols-outlined">
-                  circle
-              </span>
-              <h3>Pendientes</h3>
-            </button>
-          </div>
-        </div>
-        <div>
-          <div class="flex justify-center gap-1">
-            <button>
-              <span class="text-green-400 material-symbols-outlined">
-                  circle
-              </span>
-              <h3>Completados</h3>
-            </button>
-          </div>
-        </div>
+<div class="p-6 flex flex-col gap-6 bg-gray-900 rounded-lg h-full">
+  <section>
+    <h3 class="text-2xl font-bold text-white mb-4">Filtros</h3>
+    <div class="mb-6">
+      <h4 class="text-xl font-semibold text-white">Status</h4>
+      <div class="flex gap-4 mt-2">
+        <button class="flex items-center gap-1 focus:outline-none">
+          <span class="material-symbols-outlined text-green-800">circle</span>
+          <span class="text-white">Iniciados</span>
+        </button>
+        <button class="flex items-center gap-1 focus:outline-none">
+          <span class="material-symbols-outlined text-orange-600">circle</span>
+          <span class="text-white">Pendientes</span>
+        </button>
+        <button class="flex items-center gap-1 focus:outline-none">
+          <span class="material-symbols-outlined text-green-400">circle</span>
+          <span class="text-white">Completados</span>
+        </button>
       </div>
-      <h3 class="text-xl text-white font-semibold ">Fecha</h3>
-      <span class="text-white">Selecciona el rango de fechas</span>
-      <div class="w-full flex items-center text-white">
-        <mat-date-range-input class="bg-white text-black rounded-lg w-full p-2" [rangePicker]="picker">
+    </div>
+    <div class="mb-6">
+      <h4 class="text-xl font-semibold text-white">Fecha</h4>
+      <p class="text-sm text-white">Selecciona el rango de fechas</p>
+      <div class="flex items-center gap-2 mt-2">
+        <mat-date-range-input class="bg-white rounded-lg w-full p-2" [rangePicker]="picker">
           <input class="w-full" matStartDate placeholder="Fecha inicio">
           <input class="w-full" matEndDate placeholder="Fecha fin">
         </mat-date-range-input>
-        <mat-datepicker-toggle matSuffix [for]="picker" class="row"></mat-datepicker-toggle>
-        <mat-date-range-picker class="bg-slate-600" #picker></mat-date-range-picker>
+        <mat-datepicker-toggle  matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker  #picker></mat-date-range-picker>
       </div>
-      <div class="flex flex-col items-center">
-        <span class="text-white mb-2">
-          Selecciona un precio máximo: <strong>{{ maxPrice }}</strong>
-        </span>
+    </div>
+    <div>
+      <h4 class="text-xl font-semibold text-white">Precio máximo</h4>
+      <div class="flex flex-col items-center mt-2">
+        <span class="text-white mb-2">Selecciona un precio máximo: {{ maxPrice }}</span>
         <input
           type="range"
           min="0"
@@ -56,20 +42,19 @@
           class="w-full"
         />
       </div>
-  </div>
-  <div>
-    <h3 class="text-white">Ordenar por</h3>
-    <div class="flex w-full justify-between">
-        <h3 class="text-xl text-white font-semibold ">Fecha</h3>
-        <div class="text-white flex">
-          <span class="material-icons">arrow_upward</span>        
-        </div>
     </div>
-    <div class="flex w-full justify-between">
-        <h3 class="text-xl text-white font-semibold ">Precio</h3>
-        <div class="text-white">
-          <span class="material-icons">arrow_upward</span>
-        </div>
+  </section>
+  <section>
+    <h3 class="text-2xl font-bold text-white mb-4">Ordenar por</h3>
+    <div class="space-y-4">
+      <div class="flex justify-between items-center">
+        <span class="text-xl font-semibold text-white">Fecha</span>
+        <span class="material-icons text-white">arrow_upward</span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-xl font-semibold text-white">Precio</span>
+        <span class="material-icons text-white">arrow_upward</span>
+      </div>
     </div>
-  </div>
+  </section>
 </div>

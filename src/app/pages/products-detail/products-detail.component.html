@@ -1,0 +1,11 @@
+<div *ngIf="product" class="p-2 w-full h-full">
+    <div class="w-full">
+        <h2 class="text-white">Notebooks</h2>
+        <div class="flex text-white items-center gap-1">
+            <a class="text-xs" routerLink="/products">notebooks</a>
+            <span>/</span>
+            <p class="text-amber-600 text-xs">{{product.name}}</p>
+        </div>
+    </div>
+    <app-product-detail [product]="product"></app-product-detail>
+</div>
