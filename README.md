@@ -2,11 +2,28 @@
 
 ## Development server
 
-To start a local development server, run:
+Para iniciar el proyecto en un servidor local debes:
 
+clonar el repositorio
+
+git clone <nombre_repositorio>
+
+luego abres el directorio donde guardaste el proyecto y ejecutas en la terminal:
+
+```bash
+npm install 
+```
+instalara todas las dependencias necesarias.
+
+luego ejecutas
 ```bash
 ng serve
 ```
+o en su defecto
+```bash
+npm start
+```
+Luego podras navegar en el Sistema!
 
 ## Decisiones Relevantes
 
