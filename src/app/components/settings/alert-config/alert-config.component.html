@@ -1,1 +1,109 @@
-<p>alert-config works!</p>
+<div class="bg-slate-800 text-white shadow rounded-lg p-6">
+  <h1 class="text-3xl mb-6">Alarmas</h1>
+  <div class="grid grid-cols-1 gap-4">
+    <div *ngFor="let alarm of alarms" class="bg-slate-900 text-white shadow rounded-lg p-4">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <span *ngIf="!alarm.isEditing; else editName">
+            <h2 class="text-xl font-semibold">{{ alarm.name }}</h2>
+          </span>
+          <ng-template #editName>
+            <input
+              type="text"
+              [(ngModel)]="alarm.name"
+              class="text-xl text-black border p-1 rounded"
+            />
+          </ng-template>
+        </div>
+        <button
+          (click)="toggleEdit(alarm)"
+          class="text-blue-500 hover:text-blue-700"
+        >
+          <span class="material-icons text-base">
+            {{ alarm.isEditing ? "save" : "edit" }}
+          </span>
+        </button>
+      </div>
+      <div class="grid grid-cols-4 gap-4 text-center mb-4">
+        <div>
+          <div class="flex items-center justify-center mb-1">
+            <p class="text-gray-500 text-sm">Valor</p>
+          </div>
+          <span *ngIf="!alarm.isEditing; else editValue">
+            <p class="text-lg">{{ alarm.value }}</p>
+          </span>
+          <ng-template #editValue>
+            <input
+              type="number"
+              [(ngModel)]="alarm.value"
+              class="text-lg text-black border p-1 rounded w-full"
+            />
+          </ng-template>
+        </div>
+        <div>
+          <div class="flex items-center justify-center mb-1">
+            <p class="text-gray-500 text-sm">Condición</p>
+          </div>
+          <span *ngIf="!alarm.isEditing; else editCondition">
+            <p class="text-lg">{{ alarm.condition }}</p>
+          </span>
+          <ng-template #editCondition>
+            <select
+              [(ngModel)]="alarm.condition"
+              class="text-lg text-black border p-1 rounded w-full"
+            >
+              <option value="mayor que">mayor que</option>
+              <option value="menor que">menor que</option>
+              <option value="mayor o igual que">mayor o igual que</option>
+              <option value="menor o igual que">menor o igual que</option>
+            </select>
+          </ng-template>
+        </div>
+        <div>
+          <div class="flex items-center justify-center mb-1">
+            <p class="text-gray-500 text-sm">Categoría</p>
+          </div>
+          <span *ngIf="!alarm.isEditing; else editCategory">
+            <p class="text-lg">{{ alarm.category }}</p>
+          </span>
+          <ng-template #editCategory>
+            <select
+              [(ngModel)]="alarm.category"
+              class="text-lg text-black border p-1 rounded w-full"
+            >
+              <option value="Notebooks">Notebooks</option>
+              <option value="Celulares">Celulares</option>
+              <option value="Consolas">Consolas</option>
+            </select>
+          </ng-template>
+        </div>
+        <div>
+          <div class="flex items-center justify-center mb-1">
+            <p class="text-gray-500 text-sm">Criterio</p>
+          </div>
+          <span *ngIf="!alarm.isEditing; else editCriterion">
+            <p class="text-lg">{{ alarm.criterion }}</p>
+          </span>
+          <ng-template #editCriterion>
+            <select
+              [(ngModel)]="alarm.criterion"
+              class="text-lg text-black border p-1 rounded w-full"
+            >
+              <option value="inicial">inicial</option>
+              <option value="completado">completado</option>
+              <option value="pendiente">pendiente</option>
+            </select>
+          </ng-template>
+        </div>
+      </div>
+      <p class="text-white text-sm">
+        Si la cantidad de productos que existen en la categoría
+        <span class="font-semibold">{{ alarm.category }}</span> en estado
+        <span class="font-semibold">{{ alarm.criterion }}</span> es
+        <span class="font-semibold">{{ alarm.condition }}</span>
+        <span class="font-semibold">&nbsp;{{ alarm.value }}</span
+        >, la alarma se activará.
+      </p>
+    </div>
+  </div>
+</div>

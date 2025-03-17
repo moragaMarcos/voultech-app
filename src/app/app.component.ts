@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { GlobalCategoryService } from './services/global-category.service';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
+import { AlarmStorageService } from './services/alarm-storage.service';
 
 interface Notification {
   id: number;
@@ -21,7 +22,7 @@ interface Notification {
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Dashboard'
   categories = Object.values(ProductCategory);
   private subscription!: Subscription;
@@ -40,8 +41,12 @@ export class AppComponent {
     { label: 'Products', icon: 'inventory', route: '/products' },
     { label: 'Settings', icon: 'settings', route: '/settings' }
   ];
-  constructor(private globalCategoryService: GlobalCategoryService) {}
-
+  constructor(private globalCategoryService: GlobalCategoryService, private alarmStorageService:AlarmStorageService) {}
+  
+  ngOnInit(){
+    this.alarmStorageService.initAlarms()
+  }
+  
   onCategoryChange(target: any): void {
     const selector = target as HTMLSelectElement
     const category = selector.value as ProductCategory
